@@ -11,7 +11,7 @@ class BaseModel:
     """BaseModel class
 
     Attributes:
-        id (str, public): unique idenfier for each instance
+        id (str, public): unique identifier for each instance
         created_at (datetime, public): time when the instance was created
         updated_at (datetime, public): time when the instance was last updated
 
