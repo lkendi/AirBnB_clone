@@ -7,9 +7,11 @@ from datetime import datetime
 from models.base_model import BaseModel
 import unittest
 
+
 class TestBaseModel(unittest.TestCase):
     def test_init(self):
-        """Tests the creation of a new instance with all arguments set correctly"""
+        """Tests the creation of a new instance
+        with all arguments set correctly"""
         obj = BaseModel()
         self.assertIsInstance(obj, BaseModel)
         self.assertTrue(hasattr(obj, "id"))
@@ -28,7 +30,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(obj.updated_at, time2)
 
     # def test_init_wrong_data_types(self):
-    #     """Test error raised when created_at and updated_at are not datetime data types"""
+    #     """Test error raised when created_at and updated_at
+    #     are not datetime data types"""
     #     with self.assertRaises(TypeError):
     #         BaseModel(created_at='not a datetime')
     #     with self.assertRaises(TypeError):
@@ -62,9 +65,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('__class__', obj_dict)
         self.assertEqual(obj_dict['__class__'], 'BaseModel')
         self.assertIn('created_at', obj_dict)
-        self.assertIsInstance(datetime.fromisoformat(obj_dict['created_at']), datetime)
+        self.assertIsInstance(datetime
+                              .fromisoformat(obj_dict['created_at']), datetime)
         self.assertIn('updated_at', obj_dict)
-        self.assertIsInstance(datetime.fromisoformat(obj_dict['updated_at']), datetime)
+        self.assertIsInstance(datetime
+                              .fromisoformat(obj_dict['updated_at']), datetime)
 
 
 if __name__ == "__main__":

@@ -24,7 +24,8 @@ class BaseModel:
 
     """
 
-    def __init__(self, id=None, created_at=None, updated_at=None, *args, **kwargs):
+    def __init__(self, id=None, created_at=None, updated_at=None,
+                 *args, **kwargs):
         """Constructor - initializes a new instance of the BaseModel class
 
         Args:
@@ -34,10 +35,11 @@ class BaseModel:
                     was last updated. Default value of current date and time
         """
         for key, value in kwargs.items():
-                if key in ["created_at", "updated_at"]:
-                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
-                elif key != '__class__':
-                    setattr(self, key, value)
+            if key in ["created_at", "updated_at"]:
+                setattr(self, key, datetime.
+                        strftime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+            elif key != '__class__':
+                setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
