@@ -34,14 +34,14 @@ class BaseModel:
                     was last updated. Default value of current date and time
         """
         for key, value in kwargs.items():
-                if key == "created_at" or "updated_at":
-                    setattr(self, key, datetime.strftime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                if key in ["created_at", "updated_at"]:
+                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
                 elif key != '__class__':
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = created_at or datetime.now()
-            self.updated_at = updated_at or datetime.now()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """Returs a string representation of an instance"""
