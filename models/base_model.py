@@ -2,8 +2,8 @@
 """BaseModel Module
 """
 
-from engine import file_storage
 from datetime import datetime
+from models.engine.file_storage import FileStorage
 import uuid
 
 
@@ -11,9 +11,9 @@ class BaseModel:
     """BaseModel class
 
     Attributes:
-        id (str, public): unique identifier for each instance
-        created_at (datetime, public): time when the instance was created
-        updated_at (datetime, public): time when the instance was last updated
+        id (str): unique identifier for each instance
+        created_at (datetime): time when the instance was created
+        updated_at (datetime): time when the instance was last updated
 
     Methods:
         __init__: class constructor
@@ -24,8 +24,7 @@ class BaseModel:
 
     """
 
-    def __init__(self, id=None, created_at=None, updated_at=None,
-                 *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """Constructor - initializes a new instance of the BaseModel class
 
         Args:
@@ -34,17 +33,18 @@ class BaseModel:
             updated_at (date_time, optional): date and time when the instance
                     was last updated. Default value of current date and time
         """
-        for key, value in kwargs.items():
-            if key in ["created_at", "updated_at"]:
-                setattr(self, key, datetime
-                        .strftime(value, "%Y-%m-%dT%H:%M:%S.%f"))
-            elif key != '__class__':
-                setattr(self, key, value)
+        if kwargs:
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    setattr(self, key, datetime
+                            .strftime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif key != '__class__':
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            file_storage.new(self)
+            FileStorage().new(self)
 
     def __str__(self):
         """Returs a string representation of an instance"""
@@ -52,15 +52,16 @@ class BaseModel:
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates the updated_at attribute with the current date and time"""
+        """Updates the updated_at attribute with the current date and time
+        and saves the current object to the file storage"""
         self.updated_at = datetime.now()
-        file_storage.save()
+        FileStorage().save()
 
     def to_dict(self):
         """Converts an instance to a dictionary
 
         Returns:
-            dict: dictionary containing all attributes of the instance"""
+            obj_dict: dictionary containing all attributes of the instance"""
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         obj_dict['created_at'] = self.created_at.isoformat()

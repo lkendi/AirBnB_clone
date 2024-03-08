@@ -4,6 +4,7 @@ File Storage Module
 """
 
 import json
+import os
 
 
 class FileStorage:
@@ -22,9 +23,8 @@ class FileStorage:
                 file (__file_path) exists ; otherwise, do nothing.
     """
 
-    def __init__(self, file_path, objects):
-        self.__file_path = file_path
-        self.__objects = objects
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """Returns the dictionary __objects"""
@@ -37,10 +37,16 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects to the JSON filepath"""
-        json_file = open(self.__file_path, "w")
-        json.dump(self.__objects,json_file)
+        serialized = {}
+        for k, obj in self.__objects.items():
+            serialized[k] = obj.to_dict()
+        with open(self.__file_path, "w") as json_file:
+            json.dump(self.__objects, json_file)
 
     def reload(self):
         """Deserialized the JSON file to __objects"""
-        json_file = open(self.__file_path, "r")
-        self.__objects = json.load(json_file)
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, "r") as json_file:
+                self.__objects = json.load(json_file)
+        else:
+            pass

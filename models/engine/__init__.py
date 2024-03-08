@@ -1,6 +1,6 @@
-from file_storage import FileStorage
+#!/usr/bin/python3
+"""Module that creates a unique FileStorage instance"""
+from models.engine.file_storage import FileStorage
 
-file_path = "file.json"
-
-storage = FileStorage(file_path, objects={})
+storage = FileStorage()
 storage.reload()
