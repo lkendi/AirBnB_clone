@@ -1,4 +1,4 @@
 * Check the commented out test in tests/test_basemodel.py
 * Figure out unittests for task 4
-* Complete task 5
+* Complete task 5 - the json file is being created but only with the key and no values
 * Complete console.py (task 7)
