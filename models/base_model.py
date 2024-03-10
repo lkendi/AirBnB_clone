@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""BaseModel Module
+"""
+BaseModel Module
 """
 from datetime import datetime
 from models import storage
@@ -32,24 +33,31 @@ class BaseModel:
             updated_at (date_time, optional): date and time when the instance
                     was last updated. Default value of current date and time
         """
-        for key, value in kwargs.items():
-            if key in ["created_at", "updated_at"]:
-                setattr(self, key, datetime.strptime(
-                            value, "%Y-%m-%dT%H:%M:%S.%f"))
-            elif key != '__class__':
-                setattr(self, key, value)
+        if kwargs:
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    setattr(self, key, datetime.strptime(
+                                value, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif key != '__class__':
+                    setattr(self, key, value)
         else:
             self.id = id if id else str(uuid.uuid4())
             self.created_at = created_at if created_at else datetime.now()
             self.updated_at = updated_at if updated_at else datetime.now()
 
+        storage.new(self)
+
     def __str__(self):
-        """Returs a string representation of an instance"""
+        """
+        Returs a string representation of an instance
+        """
         class_name = self.__class__.__name__
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates the updated_at attribute with the current date and time"""
+        """
+        Updates the updated_at attribute with the current date and time
+        """
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
@@ -58,7 +66,8 @@ class BaseModel:
         """Converts an instance to a dictionary
 
         Returns:
-            dict: dictionary containing all attributes of the instance"""
+            dict: dictionary containing all attributes of the instance
+        """
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         obj_dict['created_at'] = self.created_at.isoformat()
