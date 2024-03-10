@@ -53,10 +53,12 @@ class BaseModel:
         """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
-    
+
     def __repr__(self):
-        """Returns a string representation"""
-        return(self.__str__())
+        """
+        Returns a string representation
+        """
+        return (self.__str__())
 
     def save(self):
         """
