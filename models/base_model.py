@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """BaseModel Module
 """
-
 from datetime import datetime
-from models.engine.file_storage import FileStorage
+from models import storage
 import uuid
 
 
@@ -24,7 +23,7 @@ class BaseModel:
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, id=None, created_at=None, updated_at=None, *args, **kwargs):
         """Constructor - initializes a new instance of the BaseModel class
 
         Args:
@@ -33,18 +32,16 @@ class BaseModel:
             updated_at (date_time, optional): date and time when the instance
                     was last updated. Default value of current date and time
         """
-        if kwargs:
-            for key, value in kwargs.items():
-                if key in ["created_at", "updated_at"]:
-                    setattr(self, key, datetime
-                            .strftime(value, "%Y-%m-%dT%H:%M:%S.%f"))
-                elif key != '__class__':
-                    setattr(self, key, value)
+        for key, value in kwargs.items():
+            if key in ["created_at", "updated_at"]:
+                setattr(self, key, datetime.strptime(
+                            value, "%Y-%m-%dT%H:%M:%S.%f"))
+            elif key != '__class__':
+                setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            FileStorage().new(self)
+            self.id = id if id else str(uuid.uuid4())
+            self.created_at = created_at if created_at else datetime.now()
+            self.updated_at = updated_at if updated_at else datetime.now()
 
     def __str__(self):
         """Returs a string representation of an instance"""
@@ -52,16 +49,16 @@ class BaseModel:
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates the updated_at attribute with the current date and time
-        and saves the current object to the file storage"""
+        """Updates the updated_at attribute with the current date and time"""
         self.updated_at = datetime.now()
-        FileStorage().save()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self):
         """Converts an instance to a dictionary
 
         Returns:
-            obj_dict: dictionary containing all attributes of the instance"""
+            dict: dictionary containing all attributes of the instance"""
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         obj_dict['created_at'] = self.created_at.isoformat()

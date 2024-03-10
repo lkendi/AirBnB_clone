@@ -2,13 +2,11 @@
 """
 File Storage Module
 """
-
 import json
-import os
 
 
 class FileStorage:
-    """Class that serialized instances to JSON file
+    """Class that serializes instances to JSON file
     and deserializes JSON file to instances
 
     Attributes:
@@ -37,16 +35,21 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects to the JSON filepath"""
-        serialized = {}
+        json_data = {}
         for k, obj in self.__objects.items():
-            serialized[k] = obj.to_dict()
-        with open(self.__file_path, "w") as json_file:
-            json.dump(self.__objects, json_file)
+            json_data[k] = obj.to_dict()
+        with open(self.__file_path, "a") as json_file:
+            json.dump(json_data, json_file)
 
     def reload(self):
-        """Deserialized the JSON file to __objects"""
-        if os.path.exists(self.__file_path):
+        """Deserializes the JSON file to __objects"""
+        try:
             with open(self.__file_path, "r") as json_file:
-                self.__objects = json.load(json_file)
-        else:
+                json_data = json.load(json_file)
+                for k, v in json_data.items():
+                    class_name, obj_id = k.split('.')
+                    mod_name = "models." + class_name.lower()
+                    cls = getattr(__import__(mod_name, fromlist=[class_name]),class_name)
+                    self.__objects[k] = cls(**v)
+        except:
             pass
