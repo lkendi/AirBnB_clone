@@ -3,12 +3,20 @@
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter class"""
     prompt = "(hbnb) "
+    list_of_classes = ["BaseModel", "User", "Amenity",
+                       "Place", "Review", "State", "City"]
 
     def do_quit(self, args):
         """Quit command - exits the program"""
@@ -29,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in ['BaseModel', 'User']:
+        elif args not in self.list_of_classes:
             print("** class doesn't exist **")
         else:
             new = eval(args)()
@@ -43,18 +51,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel', 'User']:
+        if line[0] not in self.list_of_classes:
             print("** class doesn't exist **")
             return
-        if len(line) < 2:
+        elif len(line) < 2:
             print("** instance id missing **")
             return
-        objects = storage.all()
-        key = f"{args[0]}.{args[1]}"
-        if key in objects:
-            print(objects[key])
         else:
-            print("** no instance found **")
+            objects = storage.all()
+            key = f"{line[0]}.{line[1]}"
+            if key in objects:
+                print(objects[key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id
@@ -63,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel', 'User']:
+        if line[0] not in self.list_of_classes:
             print("** class doesn't exist **")
             return
         if len(line) < 2:
@@ -84,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
         objs = storage.all()
         if not args:
             print(str[v] for v in objs.values())
-        elif args not in ['BaseModel', 'User']:
+        elif args not in self.list_of_classes:
             print("** class doesn't exist **")
         else:
             for k, v in objs.items():
@@ -98,26 +107,27 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel', 'User']:
+        if line[0] not in self.list_of_classes:
             print("** class doesn't exist **")
             return
         if len(line) < 2:
             print("** instance id missing **")
             return
-        key = f"{line[0]}.{line[1]}"
         objs = storage.all()
+        key = f"{line[0]}.{line[1]}"
         if key not in objs:
             print("** no instance found **")
             return
-        if len(args) < 3:
+        elif len(line) < 3:
             print("** attribute name missing **")
             return
-        if len(args) < 4:
+        elif len(line) < 4:
             print("** value missing **")
             return
-        class_instance = objs[key]
-        setattr(class_instance, args[2], args[3])
-        class_instance.save()
+        else:
+            class_instance = objs[key]
+            setattr(class_instance, line[2], line[3])
+            class_instance.save()
 
 
 if __name__ == '__main__':

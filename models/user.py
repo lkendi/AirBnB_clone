@@ -15,10 +15,7 @@ class User(BaseModel):
         first_name(string): first name of the user
         last_name(string): last name of the user
     """
-    def __init__(self):
-        """Initializes a new User object"""
-        super().__init__()
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

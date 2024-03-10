@@ -1,7 +1,3 @@
-
-===================== console.py  =======================
-* do_show and do_update functions
-
 ===================== UNITTESTS =======================
 ====> CONSOLE
 * "help" command and "help quit", "help eof" etc. (helptext about each command)
@@ -9,9 +5,3 @@
 * do_all without any args, do_all with valid class
 * do_show with valid input
 * do_update with valid input
-
-
-
-
-
-
