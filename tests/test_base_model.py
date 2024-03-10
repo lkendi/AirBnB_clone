@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""Unittest modue for models
+"""Unittest modue for BaseModel class
 """
-
-
 from datetime import datetime
 from models.base_model import BaseModel
 import unittest
 
 
 class TestBaseModel(unittest.TestCase):
+    """Class containing unittests for BaseModel class"""
+
     def test_init(self):
         """Tests the creation of a new instance
         with all arguments set correctly"""
