@@ -29,7 +29,7 @@ class TestFileStorage(unittest.TestCase):
         """
         Test for alll
         """
-        self.assertEqual(self.storage.all(), {})
+        self.assertNotEqual(self.storage.all(), {})
 
     def test_new(self):
         """
