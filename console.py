@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in ['BaseModel']:
+        elif args not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
         else:
             new = eval(args)()
@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel']:
+        if line[0] not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
             return
         if len(line) < 2:
@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel']:
+        if line[0] not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
             return
         if len(line) < 2:
@@ -85,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         objs = storage.all()
         if not args:
             print(str[v] for v in objs.values())
-        elif args not in ['BaseModel']:
+        elif args not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
         else:
             for k, v in objs.items():
@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         line = args.split()
-        if line[0] not in ['BaseModel']:
+        if line[0] not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
             return
         if len(line) < 2:

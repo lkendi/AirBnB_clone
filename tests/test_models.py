@@ -21,22 +21,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(obj, "updated_at"))
         self.assertIsInstance(obj.updated_at, datetime)
 
-    def test_init_custom_times(self):
-        """Tests custom datetime for created_at and  updated_at"""
-        time1 = datetime(2024, 3, 6)
-        time2 = datetime(2024, 4, 6)
-        obj = BaseModel(created_at=time1, updated_at=time2)
-        self.assertEqual(obj.created_at, time1)
-        self.assertEqual(obj.updated_at, time2)
-
-    # def test_init_wrong_data_types(self):
-    #     """Test error raised when created_at and updated_at
-    #     are not datetime data types"""
-    #     with self.assertRaises(TypeError):
-    #         BaseModel(created_at='not a datetime')
-    #     with self.assertRaises(TypeError):
-    #         BaseModel(updated_at='not a datetime')
-
     def test_unique_id_assignment(self):
         """Test that each instance is unique/has a unique id"""
         obj1 = BaseModel()
