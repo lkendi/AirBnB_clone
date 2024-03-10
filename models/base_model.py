@@ -52,7 +52,11 @@ class BaseModel:
         Returs a string representation of an instance
         """
         class_name = self.__class__.__name__
-        return f"[{class_name}] ({self.id}) {self.__dict__}"
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+    
+    def __repr__(self):
+        """Returns a string representation"""
+        return(self.__str__())
 
     def save(self):
         """
