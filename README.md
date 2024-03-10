@@ -26,8 +26,8 @@ The command Interpreter has the following abilities in the AirBnB Project:
 **How to start the Command Interpreter**<br>
 The Command Interpreter is started with the following command:<br>
     ```./console.py```<br>
+    
 **How to use the Command Interpreter**<br>
-
 1. Quit the console:<br>
     ```quit```
 
