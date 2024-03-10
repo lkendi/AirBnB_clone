@@ -2,4 +2,5 @@
 * Unittests
 * Check the commented out test in tests/test_basemodel.py
 * Complete task 5 - formatting the json file and ensuring the existing objects are reloaded
-* Complete console.py (task 7)
+* Complete console.py (task 7) - do_show and do_update not working as expected
+
