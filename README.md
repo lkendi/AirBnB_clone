@@ -2,7 +2,7 @@
 
 **The Console**
 
-**Project Description**
+**Project Description**<br>
 This project is geared towards getting a command interpreter to manage the AirBnB objects.
 It does the following:
 
@@ -23,12 +23,12 @@ The command Interpreter has the following abilities in the AirBnB Project:
 5. Destroy an object
 
 
-**How to start the Command Interpreter**
-The Command Interpreter is started with the following command:
+**How to start the Command Interpreter**<br>
+The Command Interpreter is started with the following command:<br>
     ```./console.py```
-**How to use the Command Interpreter**
+**How to use the Command Interpreter**<br>
 
-1. Quit the console:
+1. Quit the console:<br>
     ```quit```
 
 
