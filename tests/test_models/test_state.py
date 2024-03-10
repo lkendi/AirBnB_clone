@@ -1,10 +1,17 @@
 #!/usr/bin/python3
-
 import unittest
 from models.state import State
+from models.base_model import BaseModel
 
 
 class TestState(unittest.TestCase):
+    def test_instance(self):
+        state = State()
+        self.assertIsInstance(state, State)
+
+    def test_inherited_from_base_model(self):
+        self.assertTrue(issubclass(State, BaseModel))
+
     def test_attributes(self):
         """Test State attributes"""
         state = State()
