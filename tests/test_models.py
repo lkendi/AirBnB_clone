@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unittest modue for BaseModel class
+"""Unittest modue for models
 """
 
 

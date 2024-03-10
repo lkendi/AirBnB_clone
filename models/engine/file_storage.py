@@ -38,7 +38,7 @@ class FileStorage:
         json_data = {}
         for k, obj in self.__objects.items():
             json_data[k] = obj.to_dict()
-        with open(self.__file_path, "a") as json_file:
+        with open(self.__file_path, "w") as json_file:
             json.dump(json_data, json_file)
 
     def reload(self):
@@ -48,8 +48,8 @@ class FileStorage:
                 json_data = json.load(json_file)
                 for k, v in json_data.items():
                     class_name, obj_id = k.split('.')
-                    mod_name = "models." + class_name.lower()
-                    cls = getattr(__import__(mod_name, fromlist=[class_name]),class_name)
-                    self.__objects[k] = cls(**v)
-        except:
+                    cls = eval(class_name)
+                    instance = cls(**v)
+                    self.__objects[k] = instance
+        except Exception:
             pass
