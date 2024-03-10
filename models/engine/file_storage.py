@@ -3,6 +3,13 @@
 File Storage Module
 """
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -26,30 +33,37 @@ class FileStorage:
 
     def all(self):
         """Returns the dictionary __objects"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """Serializes __objects to the JSON filepath"""
         json_data = {}
-        for k, obj in self.__objects.items():
-            json_data[k] = obj.to_dict()
-        with open(self.__file_path, "w") as json_file:
+        for k, v in FileStorage.__objects.items():
+            json_data[k] = v.to_dict()
+        with open(FileStorage.__file_path, "w") as json_file:
             json.dump(json_data, json_file)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         try:
-            with open(self.__file_path, "r") as json_file:
+            with open(FileStorage.__file_path, "r") as json_file:
                 json_data = json.load(json_file)
                 for k, v in json_data.items():
-                    class_name, obj_id = k.split('.')
-                    cls = eval(class_name)
-                    instance = cls(**v)
-                    self.__objects[k] = instance
+                    FileStorage.__objects[k] = self.classes()[v["__class__"]](**v)
         except Exception:
             pass
+
+    def classes(self):
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
