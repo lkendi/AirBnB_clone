@@ -20,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    def emptyargs(self):
+    def emptyline(self):
         """Handles empty args + ENTER"""
         pass
 
