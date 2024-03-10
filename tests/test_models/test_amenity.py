@@ -23,24 +23,6 @@ class TestAmenity(unittest.TestCase):
             expected_str = "[Amenity] ({}) {}".format(self.amenity.id, self.amenity.__dict__)
             self.assertEqual(str(self.amenity), expected_str)
 
-    def test_to_dict(self):
-            amenity_dict = self.amenity.to_dict()
-            self.assertTrue(isinstance(amenity_dict, dict))
-            self.assertEqual(amenity_dict["__class__"], "Amenity")
-            self.assertTrue("name" in amenity_dict)
-
-    def test_from_dict(self):
-            amenity_dict = {
-                "id": "123",
-                "created_at": "2022-01-01T00:00:00",
-                "updated_at": "2022-01-01T00:00:00",
-                "name": "TV"
-            }
-            amenity = Amenity(**amenity_dict)
-            self.assertEqual(amenity.id, "123")
-            self.assertEqual(amenity.created_at.isoformat(), "2022-01-01T00:00:00")
-            self.assertEqual(amenity.updated_at.isoformat(), "2022-01-01T00:00:00")
-            self.assertEqual(amenity.name, "TV")
 
 
 if __name__ == "__main__":

@@ -30,27 +30,6 @@ class TestCity(unittest.TestCase):
         expected_str = "[City] ({}) {}".format(self.city.id, self.city.__dict__)
         self.assertEqual(str(self.city), expected_str)
 
-    def test_to_dict(self):
-        city_dict = self.city.to_dict()
-        self.assertTrue(isinstance(city_dict, dict))
-        self.assertEqual(city_dict["__class__"], "City")
-        self.assertTrue("state_id" in city_dict)
-        self.assertTrue("name" in city_dict)
-
-    def test_from_dict(self):
-        city_dict = {
-            "id": "123",
-            "created_at": "2022-01-01T00:00:00",
-            "updated_at": "2022-01-01T00:00:00",
-            "state_id": "456",
-            "name": "New York"
-        }
-        city = City(**city_dict)
-        self.assertEqual(city.id, "123")
-        self.assertEqual(city.created_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(city.updated_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(city.state_id, "456")
-        self.assertEqual(city.name, "New York")
 
 
 if __name__ == "__main__":

@@ -11,3 +11,6 @@ class State(BaseModel):
     Attributes:
         name(string) - name of the state"""
     name = ""
+    def __init__(self, *args, **kwargs):
+        """Initialize State instance"""
+        super().__init__(*args, **kwargs)

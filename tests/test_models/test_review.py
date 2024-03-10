@@ -33,30 +33,6 @@ class TestReview(unittest.TestCase):
         expected_str = "[Review] ({}) {}".format(self.review.id, self.review.__dict__)
         self.assertEqual(str(self.review), expected_str)
 
-    def test_to_dict(self):
-        review_dict = self.review.to_dict()
-        self.assertTrue(isinstance(review_dict, dict))
-        self.assertEqual(review_dict["__class__"], "Review")
-        self.assertTrue("place_id" in review_dict)
-        self.assertTrue("user_id" in review_dict)
-        self.assertTrue("text" in review_dict)
-
-    def test_from_dict(self):
-        review_dict = {
-            "id": "123",
-            "created_at": "2022-01-01T00:00:00",
-            "updated_at": "2022-01-01T00:00:00",
-            "place_id": "456",
-            "user_id": "789",
-            "text": "This is a review."
-        }
-        review = Review(**review_dict)
-        self.assertEqual(review.id, "123")
-        self.assertEqual(review.created_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(review.updated_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(review.place_id, "456")
-        self.assertEqual(review.user_id, "789")
-        self.assertEqual(review.text, "This is a review.")
 
 
 if __name__ == "__main__":

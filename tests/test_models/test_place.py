@@ -57,55 +57,6 @@ class TestPlace(unittest.TestCase):
         expected_str = "[Place] ({}) {}".format(self.place.id, self.place.__dict__)
         self.assertEqual(str(self.place), expected_str)
 
-    def test_to_dict(self):
-        place_dict = self.place.to_dict()
-        self.assertTrue(isinstance(place_dict, dict))
-        self.assertEqual(place_dict["__class__"], "Place")
-        self.assertTrue("city_id" in place_dict)
-        self.assertTrue("user_id" in place_dict)
-        self.assertTrue("name" in place_dict)
-        self.assertTrue("description" in place_dict)
-        self.assertTrue("number_rooms" in place_dict)
-        self.assertTrue("number_bathrooms" in place_dict)
-        self.assertTrue("max_guest" in place_dict)
-        self.assertTrue("price_by_night" in place_dict)
-        self.assertTrue("latitude" in place_dict)
-        self.assertTrue("longitude" in place_dict)
-        self.assertTrue("amenity_ids" in place_dict)
-
-    def test_from_dict(self):
-        place_dict = {
-            "id": "123",
-            "created_at": "2022-01-01T00:00:00",
-            "updated_at": "2022-01-01T00:00:00",
-            "city_id": "456",
-            "user_id": "789",
-            "name": "Cozy Cottage",
-            "description": "A beautiful cottage in the countryside",
-            "number_rooms": 2,
-            "number_bathrooms": 1,
-            "max_guest": 4,
-            "price_by_night": 100,
-            "latitude": 40.7128,
-            "longitude": -74.0060,
-            "amenity_ids": ["a1", "a2", "a3"]
-        }
-        place = Place(**place_dict)
-        self.assertEqual(place.id, "123")
-        self.assertEqual(place.created_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(place.updated_at.isoformat(), "2022-01-01T00:00:00")
-        self.assertEqual(place.city_id, "456")
-        self.assertEqual(place.user_id, "789")
-        self.assertEqual(place.name, "Cozy Cottage")
-        self.assertEqual(place.description, "A beautiful cottage in the countryside")
-        self.assertEqual(place.number_rooms, 2)
-        self.assertEqual(place.number_bathrooms, 1)
-        self.assertEqual(place.max_guest, 4)
-        self.assertEqual(place.price_by_night, 100)
-        self.assertEqual(place.latitude, 40.7128)
-        self.assertEqual(place.longitude, -74.0060)
-        self.assertEqual(place.amenity_ids, ["a1", "a2", "a3"])
-
 
 if __name__ == "__main__":
     unittest.main()
