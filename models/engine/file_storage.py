@@ -60,6 +60,7 @@ class FileStorage:
             pass
 
     def classes(self):
+        """More classes"""
         classes = {"BaseModel": BaseModel,
                    "User": User,
                    "State": State,
