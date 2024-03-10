@@ -30,9 +30,8 @@ class TestReview(unittest.TestCase):
         self.assertEqual(self.review.text, "")
 
     def test_str(self):
-        expected_str = "[Review] ({}) {}".format(self.review.id, self.review.__dict__)
+        expected_str = f"[Review] ({self.review.id}) {self.review.__dict__}"
         self.assertEqual(str(self.review), expected_str)
-
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import unittest
 from models.amenity import Amenity
 from models.base_model import BaseModel
 
+
 class TestAmenity(unittest.TestCase):
     def setUp(self):
         self.amenity = Amenity()
@@ -20,9 +21,9 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(self.amenity.name, str)
 
     def test_str(self):
-            expected_str = "[Amenity] ({}) {}".format(self.amenity.id, self.amenity.__dict__)
-            self.assertEqual(str(self.amenity), expected_str)
-
+        expected_str = "[Amenity] ({}) {}".format(
+            self.amenity.id, self.amenity.__dict__)
+        self.assertEqual(str(self.amenity), expected_str)
 
 
 if __name__ == "__main__":

@@ -54,7 +54,8 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(self.place.amenity_ids, [])
 
     def test_str(self):
-        expected_str = "[Place] ({}) {}".format(self.place.id, self.place.__dict__)
+        expected_str = "[Place] ({}) {}".format(
+            self.place.id, self.place.__dict__)
         self.assertEqual(str(self.place), expected_str)
 
 

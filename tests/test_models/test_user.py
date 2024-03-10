@@ -28,7 +28,7 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.user.last_name, str)
 
     def test_str(self):
-        expected_str = "[User] ({}) {}".format(self.user.id, self.user.__dict__)
+        expected_str = f"[User] ({self.user.id}) {self.user.__dict__}"
         self.assertEqual(str(self.user), expected_str)
 
     def test_to_dict(self):

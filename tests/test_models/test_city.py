@@ -27,9 +27,9 @@ class TestCity(unittest.TestCase):
         self.assertEqual(self.city.name, "")
 
     def test_str(self):
-        expected_str = "[City] ({}) {}".format(self.city.id, self.city.__dict__)
+        expected_str = "[City] ({}) {}".format(
+            self.city.id, self.city.__dict__)
         self.assertEqual(str(self.city), expected_str)
-
 
 
 if __name__ == "__main__":

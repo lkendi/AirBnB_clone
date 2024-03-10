@@ -15,6 +15,7 @@ from models.place import Place
 from models.review import Review
 from models.engine.file_storage import FileStorage
 
+
 class TestFileStorage(unittest.TestCase):
     def setUp(self):
         """Test for setup"""
@@ -71,6 +72,7 @@ class TestFileStorage(unittest.TestCase):
             "Place": Place,
             "Review": Review
         })
+
 
 if __name__ == "__main__":
     unittest.main()
