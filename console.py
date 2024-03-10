@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""program Module
+"""Console Module
 """
-
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -119,6 +118,7 @@ class HBNBCommand(cmd.Cmd):
         class_instance = objs[key]
         setattr(class_instance, args[2], args[3])
         class_instance.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

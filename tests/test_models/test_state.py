@@ -3,6 +3,7 @@
 import unittest
 from models.state import State
 
+
 class TestState(unittest.TestCase):
     def test_attributes(self):
         """Test State attributes"""
@@ -47,6 +48,7 @@ class TestState(unittest.TestCase):
         self.assertEqual(state.created_at.isoformat(), "2022-01-01T00:00:00")
         self.assertEqual(state.updated_at.isoformat(), "2022-01-01T00:00:00")
         self.assertEqual(state.name, "California")
+
 
 if __name__ == "__main__":
     unittest.main()

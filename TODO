@@ -1,6 +1,20 @@
 * Complete the README file
-* Unittests
-* Check the commented out test in tests/test_basemodel.py
 * Complete task 5 - formatting the json file and ensuring the existing objects are reloaded
-* Complete console.py (task 7) - do_show and do_update not working as expected
+
+
+===================== console.py  =======================
+* do_show and do_update functions
+
+===================== UNITTESTS =======================
+====> CONSOLE
+* "help" command and "help quit", "help eof" etc. (helptext about each command)
+* do_destroy with valid input
+* do_all without any args, do_all with valid class
+* do_show with valid input
+* do_update with valid input
+
+
+
+
+
 
